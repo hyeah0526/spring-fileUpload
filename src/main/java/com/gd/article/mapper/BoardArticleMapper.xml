@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gd.article.mapper.BoardArticleMapper">
+	<!-- 
+		selectKey
+		insert를 하고 나서 받을 것이기 때문에 order="AFTER"가 됨
+		keyProperty는 파라메터타입의 com.gd.article.dto.BoardArticle안의 articleNo에 넣을 것이다 
+		그리고 그건 resultType이 int임
+	-->
+	<insert id="insertBoardArticle" parameterType="com.gd.article.dto.BoardArticle">
+	
+		<selectKey order="AFTER" keyProperty="articleNo" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		
+		INSERT INTO board_article(
+			article_title,
+			article_content,
+			update_date,
+			create_Date
+		)VALUES(
+			#{articleTitle},
+			#{articleContent},
+			NOW(),
+			NOW()
+		)
+	</insert>
+	
+	<!-- 전체조회 -->
+	<select id="selectBoardList" resultType="map" parameterType="int">
+		SELECT a.article_no articleNo, 
+				a.article_title articleTitle, 
+				a.article_content articleContent, 
+				f.file_no fileNo,
+				f.file_name fileName
+		FROM board_article a
+		LEFT JOIN board_file f 
+			ON a.article_no = f.article_no
+		<where>
+			<if test="searchWord != null">
+				a.article_title LIKE CONCAT('%',#{searchWord},'%')
+			</if>
+		</where>
+		ORDER BY articleNo DESC
+		LIMIT #{beginRow}, #{rowPerPage};
+	</select>
+	
+	<!-- 총 행의 개수 -->
+	<select id="getListTotalCnt" resultType="int">
+		SELECT COUNT(*) 
+		FROM board_article a
+		LEFT JOIN board_file f 
+			ON a.article_no = f.article_no
+		<where>
+			<if test="searchWord != null">
+				a.article_title LIKE CONCAT('%',#{searchWord},'%')
+			</if>
+		</where>
+	</select>
+
+</mapper>
