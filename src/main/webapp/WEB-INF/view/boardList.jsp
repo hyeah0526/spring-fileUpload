@@ -13,7 +13,7 @@
 	<h1>board List</h1>
 	
 	<h4>
-		<a href="${pageContext.request.contextPath}/addBoard">등록하기</a>
+		<a href="${pageContext.request.contextPath}/addBoard">등록하기</a>  
 	</h4>
 	
 	<table border="1" style="margin: auto;">
