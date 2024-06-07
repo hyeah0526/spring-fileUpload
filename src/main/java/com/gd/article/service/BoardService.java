@@ -125,4 +125,19 @@ public class BoardService {
 		return lastPage;
 	}
 	
+	
+	
+	/* 상세보기 */
+	public Map<String, Object> getBoardOne(int articleNo){
+		Map<String, Object> map = new HashMap<>();
+		
+		log.debug(Debug.PHA + "서비스 articleNo -> " + articleNo + Debug.END);
+		
+		map = boardArticelMapper.selectBoardOne(articleNo);
+		log.debug(Debug.PHA + "서비스 map -> " + map + Debug.END);
+	
+		return map;
+	}
+	
+	
 }

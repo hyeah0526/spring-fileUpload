@@ -14,7 +14,11 @@ public interface BoardArticleMapper {
 	// public abstract를 생략하고 아래처럼 작성한 것
 	int insertBoardArticle(BoardArticle article);
 	
+	// 전체 목록 조회
 	List<Map<String, Object>> selectBoardList(int beginRow, int rowPerPage, String searchWord);
-	
+	// 전체 목록 조회 개수 
 	int getListTotalCnt(String searchWord);
+	
+	// 상세보기
+	Map<String, Object> selectBoardOne(int articleNo);
 }

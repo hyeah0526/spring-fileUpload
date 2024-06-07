@@ -12,10 +12,13 @@
 
 	<h1>board List</h1>
 	
+	<!-- 등록폼 이동 -->
 	<h4>
 		<a href="${pageContext.request.contextPath}/addBoard">등록하기</a>  
 	</h4>
 	
+	
+	<!-- 전체조회 -->
 	<table border="1" style="margin: auto;">
 		<tr>
 			<th>articleNo</th>
@@ -28,25 +31,34 @@
 			<tr>
 				<td>${b.articleNo}</td>
 				<td>${b.fileNo}</td>
-				<td><img src="/article/img/${b.fileName}" style="width: 300px;"></td>
+				<td>
+					<a href="${pageContext.request.contextPath}/boardDetail?articleNo=${b.articleNo}">
+						<img src="/article/img/${b.fileName}" style="width: 100px;">
+					</a>
+				</td>
 				<td>${b.articleTitle}</td>
 				<td>${b.articleContent}</td>
 			</tr>
 		</c:forEach>
 	</table><br><br>
 	
+	
+	<!-- 검색 -->
 	<form method="get" action="${pageContext.request.contextPath}/boardList">
 		<input type="text" name="searchWord">
 		<button type="submit">검색</button>
 	</form><br><br>
 	
+	
 	<!-- 페이징 -->
 	<c:if test="${currentPage > 1}">
-		<a href="${pageContext.request.contextPath}/boardList?currentPage=${currentPage-1}&searchWord=${searchWord}">이전</a>
+		<a href="${pageContext.request.contextPath}/boardList?currentPage=${currentPage-1}&searchWord=${searchWord}">&lt;이전</a>
 	</c:if>
+
+	<a href="${pageContext.request.contextPath}/boardList">첫번째 페이지</a>
 	
 	<c:if test="${currentPage < lastPage}">
-		<a href="${pageContext.request.contextPath}/boardList?currentPage=${currentPage+1}&searchWord=${searchWord}">다음</a>
+		<a href="${pageContext.request.contextPath}/boardList?currentPage=${currentPage+1}&searchWord=${searchWord}">다음 &gt;</a>
 	</c:if>
 	
 	

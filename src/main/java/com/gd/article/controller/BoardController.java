@@ -74,5 +74,22 @@ public class BoardController {
 		
 		return "boardList";
 	}
+	
+	
+	
+	/* 상세보기 */
+	@GetMapping("/boardDetail")
+	public String boardDetail(Model model, 
+								@RequestParam(name="articleNo") int articleNo) {
+		
+		log.debug(Debug.PHA + "컨트롤러 articleNo -> " + articleNo + Debug.END);
+		
+		Map<String, Object> map =  boardService.getBoardOne(articleNo);
+		log.debug(Debug.PHA + "컨트롤러 map -> " + map + Debug.END);
+		
+		model.addAttribute("map", map);
+		
+		return "boardDetail";
+	}
 
 }
