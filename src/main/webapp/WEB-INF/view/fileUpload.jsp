@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>fileUploade</title>
 </head>
-<body style="margin: 100px; text-align: center;">
+<body style="margin: 50px; text-align: center;">
 
 	<!-- 이렇게 줄여서도 사용이 가능 -->
 	<c:set var="cp" value="${pageContext.request.contextPath}" />

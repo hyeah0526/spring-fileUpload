@@ -61,13 +61,38 @@
 	
 	<!-- 상세보기 -->
 	<select id="selectBoardOne" resultType="map" parameterType="int">
-		SELECT a.article_no articleNo, a.article_title articleTitle, a.article_content articleContent,
-				a.create_date createDate, a.update_date updateDate,
-				f.file_name fileName, f.original_name originalName
+		SELECT a.article_no articleNo, 
+				a.article_title articleTitle, 
+				a.article_content articleContent,
+				a.create_date createDate, 
+				a.update_date updateDate,
+				f.file_no fileNo,
+				f.file_name fileName, 
+				f.original_name originalName,
+				f.file_type fileType
 		FROM board_article a
 		LEFT JOIN board_file f
 			ON a.article_no = f.article_no
 		WHERE a.article_no = #{articleNo}
 	</select>
+	<!-- <a href="이미지주소file_name" download="다운originalName"> -->
+	
+	
+	<!-- 삭제하기  -->
+	<!-- boardArticle이 삭제되기 전에 boardFile이 먼저 삭제되어야 함 -->
+	<delete id="deleteBoardArticle" parameterType="int">
+		DELETE FROM board_article 
+		WHERE article_no = #{articleNo}
+	</delete>
+	
+	
+	<!-- 수정하기 -->
+	<update id="updateBoardArticle" parameterType="com.gd.article.dto.BoardArticle">
+	UPDATE board_article 
+			SET article_title = #{articleTitle},
+			article_content = #{articleContent},
+			update_date = NOW()
+	WHERE article_no = #{articleNo}
+	</update>
 
 </mapper>

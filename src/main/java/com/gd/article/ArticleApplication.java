@@ -2,9 +2,12 @@ package com.gd.article;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+//servlet : servlet(Controller가능), filter(Intercepter 가능), listener()
+@ServletComponentScan 
 @SpringBootApplication
 public class ArticleApplication implements WebMvcConfigurer{
 
@@ -23,6 +26,10 @@ public class ArticleApplication implements WebMvcConfigurer{
 		registry.addResourceHandler("/img/**").addResourceLocations("file:///c:/upload/");
 		
 	}
+	
+	
+	// 로그인
+	
 
 	
 	

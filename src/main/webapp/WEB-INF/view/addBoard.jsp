@@ -8,9 +8,14 @@
 <meta charset="UTF-8">
 <title>fileUpload</title>
 </head>
-<body style="margin: 100px; text-align: center;">
+<body style="margin: 50px; text-align: center;">
 
 	<h1>Add Board</h1>
+	
+	<!-- 전체조회로 돌아가기 -->
+	<h4>
+		<a href="${pageContext.request.contextPath}/boardList">목록으로</a>
+	</h4>
 	
 	<form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/addBoard">
 		<table border="1" style="margin: auto;">

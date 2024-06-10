@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>board Detail</title>
 </head>
-<body style="margin: 100px; text-align: center;">
+<body style="margin: 50px; text-align: center;">
 
 	<h1>board Detail</h1>
 	
@@ -36,14 +36,23 @@
 			<td><img src="/article/img/${map.fileName}" style="width: 300px;"></td>
 		</tr>
 		<tr>
+			<th>file Original Name</th>
+			<td>${map.originalName}</td>
+		</tr>
+		<tr>
 			<th>create Date</th>
 			<td>${map.createDate}</td>
 		</tr>
 	</table><br>
 	
 	<!-- 수정/삭제 -->
+	<a href="${pageContext.request.contextPath}/boardUpdate?articleNo=${map.articleNo}">
 	<button>수정</button>
-	<button>삭제</button>
+	</a>
+	
+	<a href="${pageContext.request.contextPath}/boardRemove?articleNo=${map.articleNo}">
+		<button>삭제</button>
+	</a>
 	
 </body>
 </html>

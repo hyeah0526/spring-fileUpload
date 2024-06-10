@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gd.article.dto.BoardArticle;
 import com.gd.article.dto.BoardFile;
+import com.gd.article.dto.BoardFileRequest;
 import com.gd.article.dto.BoardRequest;
 import com.gd.article.mapper.BoardArticleMapper;
 import com.gd.article.mapper.BoardFileMapper;
@@ -25,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @Transactional
-public class BoardService {
+public class BoardArticleService {
 	
 	@Autowired BoardArticleMapper boardArticelMapper;
 	@Autowired BoardFileMapper boardFileMapper;
@@ -138,6 +139,35 @@ public class BoardService {
 	
 		return map;
 	}
+	
+	
+	/* 삭제하기 */
+	public void removeBoard(int articleNo) {
+		
+	// 물리적 파일을 먼저 삭제
+	String fileName = boardFileMapper.selectFileName(articleNo);
+	log.debug(Debug.PHA + "서비스 fileName -> " + fileName + Debug.END);
+			
+	// fileName이 있을 때만 file삭제 로직타기
+	if(fileName != null) {
+		// File을 불러오고 존재하면 삭제
+		File f = new File("c:/upload/"+fileName);
+		if(f.exists()) {
+			f.delete();
+		}
+	}
+			
+	// file 먼저 삭제
+	int deleteRow1 = boardFileMapper.deleteBoardFile(articleNo);
+	log.debug(Debug.PHA + "서비스 deleteRow2 -> " + deleteRow1 + Debug.END);
+		
+	// article 삭제
+	int deleteRow2 = boardArticelMapper.deleteBoardArticle(articleNo);
+	log.debug(Debug.PHA + "서비스 deleteRow1 -> " + deleteRow2 + Debug.END);
+		
+		
+	}
+	
 	
 	
 }

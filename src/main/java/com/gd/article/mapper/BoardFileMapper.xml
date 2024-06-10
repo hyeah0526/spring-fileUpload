@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gd.article.mapper.BoardFileMapper">
 	
+	<!-- 등록하기 -->
 	<insert id="insertBoardFile" parameterType="com.gd.article.dto.BoardFile">
 		INSERT INTO board_file(
 			article_no,
@@ -21,5 +22,37 @@
 			NOW()
 		)
 	</insert>
+	
+	
+	<!-- 삭제 -->
+	<delete id="deleteBoardFile" parameterType="int">
+		DELETE FROM board_file
+		WHERE article_no = #{articleNo}
+	</delete>
+	
+	<!-- 삭제를 위해서 file Name만 가져오기 -->
+	<select id="selectFileName" parameterType="int" resultType="String">
+		SELECT file_name FileName
+		FROM board_file
+		WHERE article_no = #{articleNo}
+	</select>
+	
+	
+	<!-- 수정 -->
+	<update id="updateBoardFile" parameterType="com.gd.article.dto.BoardFile">
+		UPDATE board_file
+		SET file_name = #{fileName},
+			original_name = #{originalName},
+			file_type = #{fileType},
+			file_size = #{fileSize},
+			update_date = NOW()
+		WHERE file_no = #{fileNo}
+	</update>
+	<!-- 수정을 위한 fileName가져오기 -->
+	<select id="selectFileNameByKey" parameterType="int" resultType="String">
+		SELECT file_name fileName
+		FROM board_file
+		WHERE file_no = #{fileNo}
+	</select>
 	
 </mapper>

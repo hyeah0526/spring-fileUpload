@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>board List</title>
 </head>
-<body style="margin: 100px; text-align: center;">
+<body style="margin: 50px; text-align: center;">
 
 	<h1>board List</h1>
 	
@@ -33,7 +33,7 @@
 				<td>${b.fileNo}</td>
 				<td>
 					<a href="${pageContext.request.contextPath}/boardDetail?articleNo=${b.articleNo}">
-						<img src="/article/img/${b.fileName}" style="width: 100px;">
+						<img src="/article/img/${b.fileName}" style="width: 150px;">
 					</a>
 				</td>
 				<td>${b.articleTitle}</td>

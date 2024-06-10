@@ -21,4 +21,10 @@ public interface BoardArticleMapper {
 	
 	// 상세보기
 	Map<String, Object> selectBoardOne(int articleNo);
+	
+	// 삭제
+	int deleteBoardArticle(int articleNo);
+	
+	// 수정
+	int updateBoardArticle(BoardArticle boardArticle);
 }
