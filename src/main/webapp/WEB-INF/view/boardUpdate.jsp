@@ -33,7 +33,7 @@
 			</tr>
 			<tr>
 				<th>새로운 이미지 업로드</th>
-				<td><input type="file" name="file" value="${map.fileName}"></td>
+				<td><input type="file" name="file"></td>
 			</tr>
 			<tr>
 				<th>수정 전 이미지</th>

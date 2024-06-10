@@ -35,16 +35,19 @@ public class BoardFileService {
 		//board_article 테이블 수정
 		int updateRow1 = boardArticelMapper.updateBoardArticle(boardArticle);
 		
+		//파일 업로드 가져오기
+		MultipartFile mf = boardFileRequest.getFile();
+		
 		// fileno + multipartFIle수정파일 ===> 수정할 키(fileNo) + 새로 업로드 될 수정 파일(multiPartFile)
 		// boardFileRequest ---> BoardFile로 변경
-		// updateRow1 성공시 파일 저장
-		if(updateRow1 == 1) {
+		
+		// updateRow1 성공 + 파일업로드가 있을 경우에만 updateRow2실행
+		// 만약 파일 업로드가 없을 경우 board_article만 수정됨(파일은 그대로)
+		if(updateRow1 == 1 && !mf.isEmpty()) {
 			
-			MultipartFile mf = boardFileRequest.getFile();
+			log.debug(Debug.PHA + "서비스 isEmpty -> " + mf.isEmpty() + Debug.END);
+
 			BoardFile file = new BoardFile();
-			
-			log.debug(Debug.PHA + "서비스 mf -> " + mf.getOriginalFilename() + Debug.END);
-			
 			file.setOriginalName(mf.getOriginalFilename());					//파일 원래 이름 
 			file.setFileType(mf.getContentType());							//파일타입
 			file.setFileSize(mf.getSize());									//파일사이즈
@@ -76,7 +79,6 @@ public class BoardFileService {
 				e.printStackTrace(); // 예외나면 전부 취소시켜야함
 				throw new RuntimeException(); // 일부러 예외를 발생시켜서 위에도 했던 명령도 전부 취소
 			}
-			
 			
 			// board_file 테이블 수정
 			int updateRow2 = boardFileMapper.updateBoardFile(file);
