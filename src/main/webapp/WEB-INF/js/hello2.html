@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	body{margin: 50px; text-align: center;}
+</style>
+</head>
+<body>
+	<script>
+		// 산술 연산자 +, -, *, /, %, **
+		// 증감 연산자 ++, --
+		// 대입 연산자 =, +=, -=, /=, %=, **=, &&=, ||=, ??=
+		// 비교 연산자 <, >, <=, >=, !=, ==, ===, !==
+		// 논리 연산자 &&, ||, !
+		// 삼항 연산자 조건?값1:값2
+		// 비트 연산자 &, |, ~, ^, <<, >>
+		// Null 연산자 
+		
+		let a = null;
+		let b = undefined;
+		let c;
+		let d = 'goodee';
+		let e = 777;
+		let f = a ?? b ?? c?? d?? e;
+		console.log('f : ', f);
+		
+		
+		let g;
+		let h;
+		let i;
+		let k = ['박', '김', '이'];
+		//g = k[0]; h = k[1]; i = k[2];
+		[g, h, i] = k;
+		console.log('k : ', k);
+		
+		// 전개구문
+		let l = [5, 7, 1];
+		let m = [10, 3, 7];
+		let n = [...l, ...m];
+		console.log('n : ', n);
+		
+		let o = (x, y, z) => {return x+y+z};
+		console.log('o: ', o(m[0], m[1], m[2]));	//아래코드와 결과 같음
+		console.log('o: ', o(...m));
+		
+	</script>
+	<h1>hello2</h1>
+	
+</body>
+</html>
+<!-- 
+	서버(웹서버, WAS == 톰캣) :: JSP(Servlet, @controller 등) -> HTML변환 -> 클라이언트 전송
+	클라이언트(브라우저) :: HTML(HTML5+CSS3+ECMA2021(6)해석 -> 랜더링 -> 결과물이 웹 페이지가 됨
+	Javascript : 랜더링된 웹페이지의 이벤트에 반영하여 html수정 or css수정
+	데이터 요청 -> Ajax API <- REST API(@RestController)
+	
+	HTML5	: 정적
+	CSS3	: 정적
+	JS		: 제어문(ex. 마우스 클릭의 반응, 키보드 눌림 반응, 정적페이지 내용 변경(form태그)반응 코드 -> 이벤트처리 -> 핸들러코드)
+			  변수, 함수, 제어문, 클래스....  -> 브라우저 API :: jQuery API + Ajax API + ChartAPI + 공공데이터 
+ -->

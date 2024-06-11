@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	body{margin: 50px; text-align: center;}
+</style>
+</head>
+<body>
+	<script>
+		let age = 10;
+		let gender = '';
+		if(age%2 == 0){
+			gender = '여자';
+		}else{
+			gender = '남자';
+		}
+		console.log('gender : ', gender)
+		
+		// n개 비교시 : else if..., switch
+		let total = 0;
+		for(let i=0; i<11; i++){
+			total = total+i;
+		}
+		console.log('total : ', total)
+		
+		let arr = ['kim', 'park', 'lee'];
+		for(let i=0; i<arr.length; i++){
+			console.log(arr[i]);
+		}
+		
+		// foreach문
+		for(let n of arr){
+			console.log(n);
+		}
+		
+		// foreach함수 : Javascript개발자들은 foreach문보다는 함수를 즐겨사용함
+		arr.forEach((n)=>{
+			console.log(n)
+		})
+		
+		// while, do while
+	</script>
+	<h1>hello3</h1>
+	
+</body>
+</html>
+<!-- 
+	서버(웹서버, WAS == 톰캣) :: JSP(Servlet, @controller 등) -> HTML변환 -> 클라이언트 전송
+	클라이언트(브라우저) :: HTML(HTML5+CSS3+ECMA2021(6)해석 -> 랜더링 -> 결과물이 웹 페이지가 됨
+	Javascript : 랜더링된 웹페이지의 이벤트에 반영하여 html수정 or css수정
+	데이터 요청 -> Ajax API <- REST API(@RestController)
+	
+	HTML5	: 정적
+	CSS3	: 정적
+	JS		: 제어문(ex. 마우스 클릭의 반응, 키보드 눌림 반응, 정적페이지 내용 변경(form태그)반응 코드 -> 이벤트처리 -> 핸들러코드)
+			  변수, 함수, 제어문, 클래스....  -> 브라우저 API :: jQuery API + Ajax API + ChartAPI + 공공데이터 
+ -->
