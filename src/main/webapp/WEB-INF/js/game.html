@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Blue Marble</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <style>
+            .gameborder {
+                border : 1px solid #000000;
+                height: 50px
+            }
+        </style>
+     </head>
+    <body>
+        <div class="container">
+            <h5>
+                Blue Marble
+                <input id="play" type="button" value="주사위 play"/>
+                주사위 값 : <input id="dice" type="text"/>
+                이동 지점 : <input id="point" type="text"/>
+            </h5>
+            <div class="row">
+                <div class="col-sm-1 gameborder">
+                        1
+                        <span id="p1">&#128110;</span>
+                </div>
+                <div class="col-sm-1 gameborder">2<span id="p2"></span></div>
+                <div class="col-sm-1 gameborder">3<span id="p3"></span></div>
+                <div class="col-sm-1 gameborder">4<span id="p4"></span></div>
+                <div class="col-sm-1 gameborder">5<span id="p5"></span></div>
+                <div class="col-sm-1 gameborder">6<span id="p6"></span></div>
+                <div class="col-sm-1 gameborder">7<span id="p7"></span></div>
+                <div class="col-sm-1 gameborder">8<span id="p8"></span></div>
+                <div class="col-sm-1 gameborder">9<span id="p9"></span></div>
+                <div class="col-sm-1 gameborder">10<span id="p10"></span></div>
+                <div class="col-sm-1 gameborder">11<span id="p11"></span></div>
+                <div class="col-sm-1 gameborder">12<span id="p12"></span></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 gameborder">44<span id="p44"></span></div>
+                <div class="col-sm-10"><span class="glyphicon glyphicon-arrow-right"></span>&nbsp;</div>
+                <div class="col-sm-1 gameborder">13<span id="p13"></span></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 gameborder">43<span id="p43"></span></div>
+                <div class="col-sm-10">&nbsp;</div>
+                <div class="col-sm-1 gameborder">14<span id="p14"></span></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 gameborder">42<span id="p42"></span></div>
+                <div class="col-sm-10">&nbsp;</div>
+                <div class="col-sm-1 gameborder">15<span id="p15"></span></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 gameborder">41<span id="p41"></span></div>
+                <div class="col-sm-10">&nbsp;</div>
+                <div class="col-sm-1 gameborder">16<span id="p16"></span></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 gameborder">40<span id="p40"></span></div>
+                <div class="col-sm-10"><span class="bg-primary">Blue Marble / Copyright @JJDEV</span></div>
+                <div class="col-sm-1 gameborder">17<span id="p17"></span></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 gameborder">39<span id="p39"></span></div>
+                <div class="col-sm-10">&nbsp;</div>
+                <div class="col-sm-1 gameborder">18<span id="p18"></span></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 gameborder">38<span id="p38"></span></div>
+                <div class="col-sm-10">&nbsp;</div>
+                <div class="col-sm-1 gameborder">19<span id="p19"></span></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 gameborder">37<span id="p37"></span></div>
+                <div class="col-sm-10">&nbsp;</div>
+                <div class="col-sm-1 gameborder">20<span id="p20"></span></div>
+            </div>
+			<div class="row">
+                <div class="col-sm-1 gameborder">36<span id="p36"></span></div>
+                <div class="col-sm-10">&nbsp;</div>
+                <div class="col-sm-1 gameborder">21<span id="p21"></span></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 gameborder">35<span id="p35"></span></div>
+                <div class="col-sm-10">&nbsp;</div>
+                <div class="col-sm-1 gameborder">22<span id="p22"></span></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 gameborder">34<span id="p34"></span></div>
+                <div class="col-sm-1 gameborder">33<span id="p33"></span></div>
+                <div class="col-sm-1 gameborder">32<span id="p32"></span></div>
+                <div class="col-sm-1 gameborder">31<span id="p31"></span></div>
+                <div class="col-sm-1 gameborder">30<span id="p30"></span></div>
+                <div class="col-sm-1 gameborder">29<span id="p29"></span></div>
+                <div class="col-sm-1 gameborder">28<span id="p28"></span></div>
+                <div class="col-sm-1 gameborder">27<span id="p27"></span></div>
+                <div class="col-sm-1 gameborder">26<span id="p26"></span></div>
+                <div class="col-sm-1 gameborder">25<span id="p25"></span></div>
+                <div class="col-sm-1 gameborder">24<span id="p24"></span></div>
+                <div class="col-sm-1 gameborder">23<span id="p23"></span></div>
+            </div>
+        </div>
+    </body>
+    
+    <script>
+    	let playBtn = document.querySelector('#play');
+    	console.log(playBtn);
+    	
+    	// 시작시 기본 포지션 1
+    	let currentPos = 1;
+    	
+    	// 이전 포지션 저장 변수
+    	let prePos = 0;
+    	
+    	/*
+    		이게 아래 함수자리에 들어가게 됨
+	    	let f = function(){
+	    		alert('click!');
+	    	};
+    	*/
+    	
+    	
+    	// 이 playBtn을 click하면 함수를 불러주세요 playBtn.addEventListner('click', 함수);
+    	// playBtn.addEventListner('click', function(){}); 
+    	playBtn.addEventListener('click', function(){
+    		console.log('play button click');
+    		
+    		// 랜덤 숫자(1~6) 2개 뽑아내기
+    		let dice1 = Math.floor(Math.random()*6) + 1;
+    		let dice2 = Math.floor(Math.random()*6) + 1;
+    		
+    		let moveBlock = dice1 + dice2;
+    		console.log('moveBlock : ' + moveBlock);
+    		
+    		// 변경전 위치값을 저장
+    		prePos = currentPos;
+    		
+    		// 현재 위치를 변경
+    		currentPos = currentPos + moveBlock;
+    		if(currentPos > 44){
+    			currentPos = currentPos - 44;
+    		}
+    		console.log('currentPos : ' + currentPos);
+    		
+    		// 이전 위치의 내용을 지우고(공백혹은을 넣기)
+    		document.querySelector('#p'+prePos).innerHTML = '&nbsp;';
+    		document.querySelector('#p'+currentPos).innerHTML = '&#128110;';
+    		
+    		
+    	});
+    	
+    </script>
+</html>
