@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>계단 게임</h1>
+	<form>
+		<fieldset>
+			<legend>가위/바위/보</legend>
+			<input type="text" id="count" readonly="readonly">번째 : 
+			<input type="radio" name="rsp" class="rsp" value="가위">가위
+			<input type="radio" name="rsp" class="rsp" value="바위">바위
+			<input type="radio" name="rsp" class="rsp" value="보">보
+			<button type="button" id="playBtn">play</button>
+			<div>log</div>
+			<div>
+				<textarea id="playLog" rows="10" cols="60" readonly="readonly"></textarea>
+			</div>
+		</fieldset>
+	</form>
+	<br>
+	<table border="1">
+		<tr>
+			<td style="width:50px; background-color: purple;">
+				<span id="s7">&nbsp;</span>
+			</td>
+			<td rowspan="7" style="text-align: center; vertical-align: bottom;">
+				<span id="s0">&#127939;</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="background-color: navy;">
+				<span id="s6">&nbsp;</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="background-color: blue;">
+				<span id="s5">&nbsp;</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="background-color: green;">
+				<span id="s4">&nbsp;</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="background-color: yellow;">
+				<span id="s3">&nbsp;</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="background-color: orange;">
+				<span id="s2">&nbsp;</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="background-color: red;">
+				<span id="s1">&nbsp;</span>
+			</td>
+		</tr>
+	</table>
+	
+	
+	<!-- 자바 스크립트 -->
+	<script>
+		// 초기화 변수 : 횟수, 현재층, 마지막층
+		let cnt = 0;
+		let stair = 0;
+		let lastStair = 7;
+		
+		// playBtn누를때마다
+		document.querySelector('#playBtn').addEventListener('click', function() {
+			console.log('playBtn click!');
+			
+			// rsp가 체크되어있는것만 전부 가져오는데 그거의 갯수가 0이면
+			if(document.querySelectorAll('.rsp:checked').length == 0){
+				alert('가위, 바위, 보를 선택하세요');
+				
+				let msg = '가위, 바위, 보를 선택하세요\n';
+				msg += 'GAME COUNT : ' + cnt + '\n' + 'CURRENT STAIR : ' + stair;
+				
+				document.querySelector('#playLog').value = msg;
+				return;
+			}
+			
+			// 사용자 
+			let myRsp = document.querySelectorAll('.rsp:checked')[0].value;
+			console.log('myRsp : ', myRsp);
+			
+			// 시스템
+			let temp = ['가위', '바위', '보'];
+			let sysRsp = temp[Math.floor(Math.random()*3)];
+			console.log('sysRsp : ', sysRsp);
+			
+			// 계단 옮겨주기
+			let moveVal = 0;
+			if(myRsp == sysRsp){
+				// 비겼다 : 그대로
+				console.log('비겼다');
+				
+			} else if((myRsp == '가위' && sysRsp == '보')
+						|| (myRsp == '바위' && sysRsp == '가위')
+						|| (myRsp == '보' && sysRsp == '바위')) {
+				// 이겼다 : 한칸 위로
+				console.log('사용자가 이겼다');
+				moveVal = 1;
+				
+			} else {
+				//졌다 : 한칸 아래로
+				console.log('사용자가 졌다');
+				moveVal = -1;
+			}
+			
+			let preStair = stair;
+			// 현재층도 표시해주기
+			stair = stair + moveVal;
+			// 제일 최하층 0설정
+			if(stair < 0){
+				stair = 0;
+			};
+
+			document.querySelector('#s'+preStair).innerHTML = '&nbsp;';
+			document.querySelector('#s'+stair).innerHTML = '&#127939;';
+			
+			// 몇번째 시도했는지 채워주기
+			cnt = cnt + 1;
+			document.querySelector('#count').value = cnt;
+			
+			// playLog 
+			document.querySelector('#playLog').value
+				= 'GAME COUNT : ' + cnt + '\n' + 'CURRENT STAIR : ' + stair;
+			
+			
+			// 제일 최상층 7이되면 버튼이 비활성화되면서 게임이 종료됨
+			if(stair == 7){
+				document.querySelector('#playBtn').disabled = true;
+				document.querySelector('#playLog').value
+				= '게임 종료\nGAME COUNT : ' + cnt + '\n' + 'CURRENT STAIR : ' + stair;
+				alert('게임 종료');
+			};
+			
+		});
+		
+	</script>
+</body>
+</html>
