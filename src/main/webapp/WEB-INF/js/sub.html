@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- jQuery사용 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+	<!-- 테이블: ajax -->
+
+	<select id="large">
+		<option value="">대분류 선택</option>
+	</select>
+	
+	<select id="medium">
+		<option value="">중분류 선택</option>
+	</select>
+	
+	<select id="small">
+		<option value="">소분류 선택</option>
+	</select>
+	
+	
+	<script>
+		// 대분류 출력
+		// ajax호출함수 $.ajax({})
+		$.ajax({
+			url: '/ajax/large',
+			method: 'POST',
+			// 성공했을 시
+			success:function(largeData){
+				console.log('largeData -> ' + largeData);
+				
+				
+				largeData.forEach(function(item) { // 아메리카, 아시아, 유럽
+					console.log('item -> ' + item);
+					
+					// 숫자만큼 option만들어주기
+					$('#large').append('<option value="'+item+'">'+item+'</option>');
+					
+				});
+			}
+		});
+		
+		
+		// 중분류 출력
+		$('#large').change(function(){
+			if($('#large').val() == '') {
+				return;
+			}
+			
+			$.ajax({
+				url:'/ajax/medium',
+				method:'post',
+				data:{'largeName' : $('#large').val()},
+				success:function(mediumData) { // mediumData : List<Map>
+					console.log(mediumData);
+					
+					// 만약 전에 기록이 남아있으면 지워주기
+					$('#medium').empty();
+					
+					$('#medium').append('<option value="">중분류 선택</option>');
+					
+					mediumData.forEach(function(item){ 
+						$('#medium').append('<option value="' + 
+								item.mediumNo + '">' + item.mediumName + '</option>');
+					});
+				}
+			});
+		});
+		
+		
+		// 소분류 출력
+		$('#medium').change(function() {
+			if($('#medium').val() == '') {
+				return;
+			}
+				
+			$.ajax({
+				url:'/ajax/small',
+				method:'post',
+				data:{'mediumNo' : $('#medium').val()},
+				success:function(smallData){
+					console.log(smallData);
+					
+					$('#small').empty();
+					
+					$('#small').append('<option value="">소분류 선택</option>')
+					
+					smallData.forEach(function(item) {
+						$('#small').append('<option value="'+item+'">'+item+'</option>');
+					})
+				}
+			});
+		});
+	</script>
+</body>
+</html>
